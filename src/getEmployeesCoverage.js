@@ -23,7 +23,7 @@ const verificaID = (objeto) => {
   return colaboradores.find(({ id }) => objeto.id === id);
 };
 
-const verficiaName = (objeto) => {
+const verficaName = (objeto) => {
   if (!names.includes(objeto.name)) {
     throw new Error('Informações inválidas');
   }
@@ -35,7 +35,7 @@ const verficiaName = (objeto) => {
 const getEmployeesCoverage = (obj) => {
   if (!obj) return colaboradores;
   if (obj.id) return verificaID(obj);
-  if (obj.name) return verficiaName(obj);
+  if (obj.name) return verficaName(obj);
 };
 
 console.log(getEmployeesCoverage({ name: 'Nelson' }));
