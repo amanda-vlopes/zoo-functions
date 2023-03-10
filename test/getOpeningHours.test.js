@@ -1,11 +1,14 @@
 const getOpeningHours = require('../src/getOpeningHours');
 
+const open = 'The zoo is open';
+const closed = 'The zoo is closed';
+
 describe('Testes da função getOpeningHours', () => {
   it('verifica se getOpeningHours é uma funçao', () => {
     expect(typeof getOpeningHours).toBe('function');
   });
   it('verifica se o parâmetro de dia da semana é case sensitive', () => {
-    expect(getOpeningHours('Tuesday', '12:30-pm')).toEqual(getOpeningHours('TUESDAY', '12:30-PM'));
+    expect(getOpeningHours('Tuesday', '10:30-am')).toEqual(getOpeningHours('TUESDAY', '10:30-AM'));
   });
   it('ao receber uma string que não é um dia da semana lança um erro', () => {
     expect(() => getOpeningHours('Segunda', '10:30-AM')).toThrow(new Error('The day must be valid. Example: Monday'));
@@ -38,12 +41,15 @@ describe('Testes da função getOpeningHours', () => {
     expect(getOpeningHours()).toEqual(horarios);
   });
   it('ao receber um dia e horário dentro do funcionamento retorna que o zoo está aberto', () => {
-    expect(getOpeningHours('Tuesday', '2:30-PM')).toBe('The zoo is open');
+    expect(getOpeningHours('Tuesday', '2:30-PM')).toBe(open);
   });
   it('ao receber um dia e horário fora do funcionamento retorna que o zoo está fechado', () => {
-    expect(getOpeningHours('Friday', '6:30-AM')).toBe('The zoo is closed');
+    expect(getOpeningHours('Friday', '6:30-AM')).toBe(closed);
   });
   it('ao não receber uma hora definida retorna que o zoo está fechado', () => {
-    expect(getOpeningHours('Friday', '00:00-AM')).toBe('The zoo is closed');
+    expect(getOpeningHours('Friday', '00:00-AM')).toBe(closed);
+  });
+  it('ao receber qualquer hora para Monday retorna que o zoo está fechado', () => {
+    expect(getOpeningHours('Monday', '10:00-AM')).toBe(closed);
   });
 });
