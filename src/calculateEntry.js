@@ -1,34 +1,33 @@
 const data = require('../data/zoo_data');
 
 // const countEntrants = (entrants) => {
+//   let countChild = 0;
+//   let countAdult = 0;
+//   let countSenior = 0;
 //   return entrants.reduce((resultado, { age }) => {
 //     const obj = resultado;
-//     if (age < 18) {
-//       obj.child += 1;
-//     } else if (age >= 18 && age < 50) {
-//       obj.adult += 1;
-//     } else if (age >= 50) {
-//       obj.senior += 1;
-//     }
+//     if (age < 18) countChild += 1;
+//     if (age >= 18 && age < 50) countAdult += 1;
+//     if (age >= 50) countSenior += 1;
+//     obj.child = countChild;
+//     obj.adult = countAdult;
+//     obj.senior = countSenior;
 //     return resultado;
 //   }, {});
 // };
 
-const countEntrants = (entrants) => {
-  let countChild = 0;
-  let countAdult = 0;
-  let countSenior = 0;
-  return entrants.reduce((resultado, { age }) => {
+const countEntrants = (entrants) =>
+  entrants.reduce((resultado, { age }) => {
     const obj = resultado;
-    if (age < 18) countChild += 1;
-    if (age >= 18 && age < 50) countAdult += 1;
-    if (age >= 50) countSenior += 1;
-    obj.child = countChild;
-    obj.adult = countAdult;
-    obj.senior = countSenior;
+    if (age < 18) {
+      obj.child += 1;
+    } else if (age >= 18 && age < 50) {
+      obj.adult += 1;
+    } else if (age >= 50) {
+      obj.senior += 1;
+    }
     return resultado;
-  }, {});
-};
+  }, { child: 0, adult: 0, senior: 0 });
 
 const calculateEntry = (entrants) => {
   if (entrants && entrants.length !== 0) {
